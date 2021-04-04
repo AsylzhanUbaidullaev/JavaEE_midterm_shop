@@ -32,6 +32,9 @@
                                                              href="about.jsp"><span>ABOUT US</span></a>
                     </li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
+                                                             href="about.jsp"><span>GIFT CARD</span></a>
+                    </li>
+                    <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
                                                              href="login.jsp"><span>SIGN IN</span></a>
                     </li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"

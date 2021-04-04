@@ -21,6 +21,7 @@
 </header>
 <div class="container">
     <main class="form-signin">
+        <%-- Implicit objest & expression scriplet --%>
         <form action="<%= request.getContextPath() %>/register" method="post">
             <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
             <label for="inputEmail" class="visually-hidden">Name</label>

@@ -6,8 +6,7 @@ import java.sql.*;
 
 public class UserDao {
     public int registerUser(User user) throws ClassNotFoundException {
-        String INSERT_USERS_SQL = "INSERT INTO account" +
-                "  (id, name, email, password) VALUES " +
+        String INSERT_USERS_SQL = "INSERT INTO account" + "  (id, name, email, password) VALUES " +
                 " (?, ?, ?, ?);";
 
         int result = 0;
@@ -18,7 +17,7 @@ public class UserDao {
                 .getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020");
 
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-            preparedStatement.setInt(1, 11);
+            preparedStatement.setInt(1, 14);
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPassword());

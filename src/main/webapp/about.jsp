@@ -16,6 +16,7 @@
 </head>
 <body>
 <header>
+    <%-- action tags --%>
     <jsp:include page="header.jsp"/>
 </header> <br><br><br><br>
 <div class="content___app___3asrL"><h1 class="staticPageHead___app___2-OAb">О нас</h1><div class="staticPageContainer___app___2HRSy">Компания Road to the Dream – это не отдельный человек или команда, Road to the Dream – это каждый, кто живет с мечтой в сердце и готов прикладывать усилия для ее достижения!

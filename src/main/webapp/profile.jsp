@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>
-
+            <%--statement scriplet --%>
             <%
                 String email = request.getParameter("email");
                 String name = request.getParameter("firstName");
@@ -42,6 +42,8 @@
 <%--                    <td>:</td>--%>
 <%--                    <td><%=name%></td>--%>
 <%--                </tr>--%>
+
+                <%-- expression statement --%>
                 <tr>
                     <td>Email</td>
                     <td>:</td>
