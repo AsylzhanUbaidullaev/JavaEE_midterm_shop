@@ -36,12 +36,15 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (userDao.validate(user)) {
-                //HttpSession session = request.getSession();
-                // session.setAttribute("username",username);
-//                out.println("<center>\n<h1>You logged in " + name + " !</h1>");
-//                response.sendRedirect("profile.jsp");
-                RequestDispatcher rd=request.getRequestDispatcher("profile.jsp");
-                rd.forward(request,response);
+                HttpSession session = request.getSession();
+                 session.setAttribute("user",user);
+                out.println("<center>\n<h1>You logged in " + name + " !</h1>");
+                response.sendRedirect("profile.jsp");
+
+//                RequestDispatcher rd=request.getRequestDispatcher("profile.jsp");
+//                rd.forward(request,response);
+//                RequestDispatcher forwardUser = getServletContext().getRequestDispatcher("product-list.jsp");
+//                forwardUser.include(request, response);
             } else {
                 HttpSession session = request.getSession();
                 response.sendRedirect("testing.jsp");

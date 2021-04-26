@@ -1,5 +1,7 @@
 package com.asylzhan.shop.JavaEE_midterm_shop;
 
+import com.asylzhan.shop.JavaEE_midterm_shop.model.User;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,6 +20,8 @@ public class ProfileServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
+        HttpSession httpSession = request.getSession();
+        User user = (User) httpSession.getAttribute("user");
         String n=request.getParameter("email");
         out.print("Welcome "+n);
     }

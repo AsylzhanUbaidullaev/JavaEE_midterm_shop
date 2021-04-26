@@ -1,3 +1,5 @@
+<%@ page import="com.asylzhan.shop.JavaEE_midterm_shop.model.User" %>
+<%@ page import="com.asylzhan.shop.JavaEE_midterm_shop.controller.LoginServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +25,10 @@
             <i class="fa fa-pen fa-xs edit"></i>
             <%--statement scriplet --%>
             <%
+//                HttpSession httpSession = request.getSession();
+//                User user = (User) httpSession.getAttribute("user");
+//                if (user == null) {
+
                 String email = request.getParameter("email");
                 String name = request.getParameter("firstName");
                 String password = request.getParameter("password");
@@ -33,10 +39,10 @@
 <%--                <tr>--%>
 <%--                    <td>Name</td>--%>
 <%--                    <td>:</td>--%>
-<%--                    <td><%=name%></td>--%>
+<%--                    <td><%=user.getName()%></td>--%>
 <%--                </tr>--%>
 
-                <%-- expression statement --%>
+<%--                 expression statement--%>
                 <tr>
                     <td>Email</td>
                     <td>:</td>
