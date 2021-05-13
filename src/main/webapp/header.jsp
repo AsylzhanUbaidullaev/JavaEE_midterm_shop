@@ -6,6 +6,8 @@
 </head>
 <body>
 <header>
+    <jsp:useBean id="user" class="com.asylzhan.shop.JavaEE_midterm_shop.model.User" scope="session"/>
+    <jsp:setProperty name="user" property="*"/>
     <div class="header___Header___3L22I">
         <div class="container___Header___2fzwa">
             <div class="logo___Header___YX1XE block___Logo___X8X26">
@@ -17,22 +19,34 @@
             <nav class="nav___Navigation___3sR2r">
                 <ul class="list___Navigation___-RHSG">
                     <li class="item___Navigation___2cSmE">
-                        <a class="a___Navigation___3Bzsr" href="products.jsp"><span>MENS</span></a>
+                        <a class="a___Navigation___3Bzsr" href="AllProductsServlet"><span>MENS</span></a>
                     </li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
-                                                             href="product-list"><span>ACCESSORIES</span></a></li>
+                                                             href="old_jsp/product-list.jsp"><span>ACCESSORIES</span></a></li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
                                                              href="about.jsp"><span>ABOUT US</span></a>
                     </li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
-                                                             href="about.jsp"><span>GIFT CARD</span></a>
+                                                             href="gift-card.jsp"><span>GIFT CARD</span></a>
                     </li>
+                    <% if (user.getEmail() == null) {%>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
                                                              href="login.jsp"><span>SIGN IN</span></a>
                     </li>
                     <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
                                                              href="registration.jsp"><span>REGISTRATION</span></a>
                     </li>
+                    <%}
+                    else if (user.getEmail() != null) {
+                    %>
+                    <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
+                                                             href="profile.jsp"><span><jsp:getProperty name="user" property="name"/></span></a>
+                    </li>
+                    <li class="item___Navigation___2cSmE"><a class="a___Navigation___3Bzsr"
+                                                             href="logout"><span>Logout</span></a>
+                    </li>
+                    <%}%>
+
                 </ul>
             </nav>
             <div class="block___Actions___2XYLk">
@@ -47,8 +61,10 @@
                     <!--          Cabinet-->
                     <div class="icons___Icons___1xQoR">
                         <a class="userIcon___Icons___1GoRv" href="profile.jsp">
-                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiBkYXRhLXByZWZpeD0iZmFsIiBkYXRhLWljb249InVzZXIiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNDQ4IDUxMiIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXVzZXIgZmEtdy0xNCBmYS0zeCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMzEzLjYgMjg4Yy0yOC43IDAtNDIuNSAxNi04OS42IDE2LTQ3LjEgMC02MC44LTE2LTg5LjYtMTZDNjAuMiAyODggMCAzNDguMiAwIDQyMi40VjQ2NGMwIDI2LjUgMjEuNSA0OCA0OCA0OGgzNTJjMjYuNSAwIDQ4LTIxLjUgNDgtNDh2LTQxLjZjMC03NC4yLTYwLjItMTM0LjQtMTM0LjQtMTM0LjR6TTQxNiA0NjRjMCA4LjgtNy4yIDE2LTE2IDE2SDQ4Yy04LjggMC0xNi03LjItMTYtMTZ2LTQxLjZDMzIgMzY1LjkgNzcuOSAzMjAgMTM0LjQgMzIwYzE5LjYgMCAzOS4xIDE2IDg5LjYgMTYgNTAuNCAwIDcwLTE2IDg5LjYtMTYgNTYuNSAwIDEwMi40IDQ1LjkgMTAyLjQgMTAyLjRWNDY0ek0yMjQgMjU2YzcwLjcgMCAxMjgtNTcuMyAxMjgtMTI4UzI5NC43IDAgMjI0IDAgOTYgNTcuMyA5NiAxMjhzNTcuMyAxMjggMTI4IDEyOHptMC0yMjRjNTIuOSAwIDk2IDQzLjEgOTYgOTZzLTQzLjEgOTYtOTYgOTYtOTYtNDMuMS05Ni05NiA0My4xLTk2IDk2LTk2eiIgY2xhc3M9IiI+PC9wYXRoPjwvc3ZnPgo=" alt="user icon" role="link" class="icon___IconButton___2ufl5"></a><span>
-              <img src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhbCIgZGF0YS1pY29uPSJzaG9wcGluZy1jYXJ0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1zaG9wcGluZy1jYXJ0IGZhLXctMTggZmEtM3giPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTU1MS45OTEgNjRIMTI5LjI4bC04LjMyOS00NC40MjNDMTE4LjgyMiA4LjIyNiAxMDguOTExIDAgOTcuMzYyIDBIMTJDNS4zNzMgMCAwIDUuMzczIDAgMTJ2OGMwIDYuNjI3IDUuMzczIDEyIDEyIDEyaDc4LjcybDY5LjkyNyAzNzIuOTQ2QzE1MC4zMDUgNDE2LjMxNCAxNDQgNDMxLjQyIDE0NCA0NDhjMCAzNS4zNDYgMjguNjU0IDY0IDY0IDY0czY0LTI4LjY1NCA2NC02NGE2My42ODEgNjMuNjgxIDAgMCAwLTguNTgzLTMyaDE0NS4xNjdhNjMuNjgxIDYzLjY4MSAwIDAgMC04LjU4MyAzMmMwIDM1LjM0NiAyOC42NTQgNjQgNjQgNjQgMzUuMzQ2IDAgNjQtMjguNjU0IDY0LTY0IDAtMTcuOTkzLTcuNDM1LTM0LjI0LTE5LjM4OC00NS44NjhDNTA2LjAyMiAzOTEuODkxIDQ5Ni43NiAzODQgNDg1LjMyOCAzODRIMTg5LjI4bC0xMi02NGgzMzEuMzgxYzExLjM2OCAwIDIxLjE3Ny03Ljk3NiAyMy40OTYtMTkuMTA1bDQzLjMzMS0yMDhDNTc4LjU5MiA3Ny45OTEgNTY3LjIxNSA2NCA1NTEuOTkxIDY0ek0yNDAgNDQ4YzAgMTcuNjQ1LTE0LjM1NSAzMi0zMiAzMnMtMzItMTQuMzU1LTMyLTMyIDE0LjM1NS0zMiAzMi0zMiAzMiAxNC4zNTUgMzIgMzJ6bTIyNCAzMmMtMTcuNjQ1IDAtMzItMTQuMzU1LTMyLTMyczE0LjM1NS0zMiAzMi0zMiAzMiAxNC4zNTUgMzIgMzItMTQuMzU1IDMyLTMyIDMyem0zOC4xNTYtMTkySDE3MS4yOGwtMzYtMTkyaDQwNi44NzZsLTQwIDE5MnoiIGNsYXNzPSIiPjwvcGF0aD48L3N2Zz4=" alt="package icon" role="link" class="icon___IconButton___2ufl5"><span class="cartCounter___Icons___Fh8hg">&nbsp;&nbsp;</span></span>
+                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiBkYXRhLXByZWZpeD0iZmFsIiBkYXRhLWljb249InVzZXIiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNDQ4IDUxMiIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXVzZXIgZmEtdy0xNCBmYS0zeCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMzEzLjYgMjg4Yy0yOC43IDAtNDIuNSAxNi04OS42IDE2LTQ3LjEgMC02MC44LTE2LTg5LjYtMTZDNjAuMiAyODggMCAzNDguMiAwIDQyMi40VjQ2NGMwIDI2LjUgMjEuNSA0OCA0OCA0OGgzNTJjMjYuNSAwIDQ4LTIxLjUgNDgtNDh2LTQxLjZjMC03NC4yLTYwLjItMTM0LjQtMTM0LjQtMTM0LjR6TTQxNiA0NjRjMCA4LjgtNy4yIDE2LTE2IDE2SDQ4Yy04LjggMC0xNi03LjItMTYtMTZ2LTQxLjZDMzIgMzY1LjkgNzcuOSAzMjAgMTM0LjQgMzIwYzE5LjYgMCAzOS4xIDE2IDg5LjYgMTYgNTAuNCAwIDcwLTE2IDg5LjYtMTYgNTYuNSAwIDEwMi40IDQ1LjkgMTAyLjQgMTAyLjRWNDY0ek0yMjQgMjU2YzcwLjcgMCAxMjgtNTcuMyAxMjgtMTI4UzI5NC43IDAgMjI0IDAgOTYgNTcuMyA5NiAxMjhzNTcuMyAxMjggMTI4IDEyOHptMC0yMjRjNTIuOSAwIDk2IDQzLjEgOTYgOTZzLTQzLjEgOTYtOTYgOTYtOTYtNDMuMS05Ni05NiA0My4xLTk2IDk2LTk2eiIgY2xhc3M9IiI+PC9wYXRoPjwvc3ZnPgo=" alt="user icon" role="link" class="icon___IconButton___2ufl5"></a>
+                        <a class="userIcon___Icons___1GoRv" href="cart.jsp  ">
+                        <span>
+                            <img src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhbCIgZGF0YS1pY29uPSJzaG9wcGluZy1jYXJ0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDU3NiA1MTIiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1zaG9wcGluZy1jYXJ0IGZhLXctMTggZmEtM3giPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTU1MS45OTEgNjRIMTI5LjI4bC04LjMyOS00NC40MjNDMTE4LjgyMiA4LjIyNiAxMDguOTExIDAgOTcuMzYyIDBIMTJDNS4zNzMgMCAwIDUuMzczIDAgMTJ2OGMwIDYuNjI3IDUuMzczIDEyIDEyIDEyaDc4LjcybDY5LjkyNyAzNzIuOTQ2QzE1MC4zMDUgNDE2LjMxNCAxNDQgNDMxLjQyIDE0NCA0NDhjMCAzNS4zNDYgMjguNjU0IDY0IDY0IDY0czY0LTI4LjY1NCA2NC02NGE2My42ODEgNjMuNjgxIDAgMCAwLTguNTgzLTMyaDE0NS4xNjdhNjMuNjgxIDYzLjY4MSAwIDAgMC04LjU4MyAzMmMwIDM1LjM0NiAyOC42NTQgNjQgNjQgNjQgMzUuMzQ2IDAgNjQtMjguNjU0IDY0LTY0IDAtMTcuOTkzLTcuNDM1LTM0LjI0LTE5LjM4OC00NS44NjhDNTA2LjAyMiAzOTEuODkxIDQ5Ni43NiAzODQgNDg1LjMyOCAzODRIMTg5LjI4bC0xMi02NGgzMzEuMzgxYzExLjM2OCAwIDIxLjE3Ny03Ljk3NiAyMy40OTYtMTkuMTA1bDQzLjMzMS0yMDhDNTc4LjU5MiA3Ny45OTEgNTY3LjIxNSA2NCA1NTEuOTkxIDY0ek0yNDAgNDQ4YzAgMTcuNjQ1LTE0LjM1NSAzMi0zMiAzMnMtMzItMTQuMzU1LTMyLTMyIDE0LjM1NS0zMiAzMi0zMiAzMiAxNC4zNTUgMzIgMzJ6bTIyNCAzMmMtMTcuNjQ1IDAtMzItMTQuMzU1LTMyLTMyczE0LjM1NS0zMiAzMi0zMiAzMiAxNC4zNTUgMzIgMzItMTQuMzU1IDMyLTMyIDMyem0zOC4xNTYtMTkySDE3MS4yOGwtMzYtMTkyaDQwNi44NzZsLTQwIDE5MnoiIGNsYXNzPSIiPjwvcGF0aD48L3N2Zz4=" alt="package icon" role="link" class="icon___IconButton___2ufl5"><span class="cartCounter___Icons___Fh8hg">&nbsp;&nbsp;</span></span></a>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
@@ -43,18 +44,22 @@ public class AuthenticationFilter implements Filter {
 //            }
 
 
-        } else {
-//            out.print("username or password is not correct!");
-//            String email = request.getParameter("email");
-//            String name = request.getParameter("firstName");
-//            String password = request.getParameter("password");
-            User user = new User();
-//            user.setFirstName(name);
-            user.setEmail(email);
-            user.setPassword(password);
+//        } else {
+////            out.print("username or password is not correct!");
+////            String email = request.getParameter("email");
+////            String name = request.getParameter("firstName");
+////            String password = request.getParameter("password");
+//            User user = new User();
+////            user.setFirstName(name);
+//            user.setEmail(email);
+//            user.setPassword(password);
+//
+
 
             try {
-                if (userDao.validate(user)) {
+                User user = userDao.validate(email,password);
+
+                if (user != null) {
                     //HttpSession session = request.getSession();
                     // session.setAttribute("username",username);
 //                out.println("<center>\n<h1>You logged in " + name + " !</h1>");
@@ -63,11 +68,11 @@ public class AuthenticationFilter implements Filter {
                     rd.forward(request,response);
                 } else {
 //                    HttpSession session = request.getSession();
-//                    response.sendRedirect("testing.jsp");
+//                    response.sendRedirect("error.jsp");
                     //session.setAttribute("user", username);
                     //response.sendRedirect("login.jsp");
                 }
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }

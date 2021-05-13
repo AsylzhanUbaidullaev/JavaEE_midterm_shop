@@ -10,21 +10,20 @@ import java.util.List;
 
 public class UserDao {
     public int registerUser(User user) throws ClassNotFoundException {
-        String INSERT_USERS_SQL = "INSERT INTO account" + "  (id, name, email, password) VALUES " +
-                " (?, ?, ?, ?);";
+        String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, password) VALUES " +
+                " (?, ?, ?);";
 
         int result = 0;
 
         Class.forName("org.postgresql.Driver");
 
         try (Connection connection = DriverManager
-                .getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020");
+                .getConnection("jdbc:postgresql://localhost:5432/rd", "postgres", "aktos2020");
 
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-            preparedStatement.setInt(1, 16);
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getPassword());
 
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();
@@ -36,29 +35,57 @@ public class UserDao {
         return result;
     }
 
-    public boolean validate(User user) throws ClassNotFoundException {
+    public User validate(String email, String password) throws ClassNotFoundException, SQLException {
         boolean status = false;
 
         Class.forName("org.postgresql.Driver");
 
-        try (Connection connection = DriverManager
-                .getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020");
+        Connection connection = DriverManager
+                .getConnection("jdbc:postgresql://localhost:5432/rd", "postgres", "aktos2020");
 
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement("select * from account where email = ? and password = ? ")) {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("select * from users where email = ? and password = ? ");
 //            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, password);
 
-            System.out.println(preparedStatement);
-            ResultSet rs = preparedStatement.executeQuery();
-            status = rs.next();
-
-        } catch (SQLException e) {
-            // process sql exception
-            printSQLException(e);
+        System.out.println(preparedStatement);
+        ResultSet rs = preparedStatement.executeQuery();
+        User user = null;
+        if (rs.next()){
+            user = new User();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setName(rs.getString("name"));
+            user.setPassword(rs.getString("password"));
         }
-        return status;
+        rs.close();
+        return user;
+    }
+
+    public User selectById(int id) throws SQLException, ClassNotFoundException{
+
+        Class.forName("org.postgresql.Driver");
+
+        Connection connection = DriverManager
+                .getConnection("jdbc:postgresql://localhost:5432/rd", "postgres", "aktos2020");
+
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("select * from users where id = ? LIMIT 1");
+//            preparedStatement.setString(1, user.getFirstName());
+        preparedStatement.setInt(1, id);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        User user = null;
+        if (rs.next()){
+            user = new User();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setName(rs.getString("name"));
+            user.setPassword(rs.getString("password"));
+        }
+        rs.close();
+        return user;
     }
 
     public ArrayList<Product> select() {
@@ -66,7 +93,7 @@ public class UserDao {
         ArrayList<Product> products = new ArrayList<>();
         try{
             Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-            try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020")){
+            try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/rd", "postgres", "aktos2020")){
 
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM products");
@@ -80,7 +107,7 @@ public class UserDao {
                     product.setId(productId);
                     product.setName(name);
 //                    product.setDescription(description);
-                    product.setImage_link(image_link);
+                    product.setDescription(image_link);
                     product.setPrice(price);
                     products.add(product);
                 }
@@ -97,9 +124,9 @@ public class UserDao {
         Product product = null;
         try{
             Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020")){
+            try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/rd", "postgres", "aktos2020")){
 
-                String sql = "SELECT * FROM products WHERE product_id=?";
+                String sql = "SELECT * FROM products WHERE id=?";
                 try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
                     preparedStatement.setInt(1, id);
                     ResultSet resultSet = preparedStatement.executeQuery();
@@ -113,7 +140,7 @@ public class UserDao {
                         product.setId(productId);
                         product.setName(name);
 //                        product.setDescription(description);
-                        product.setImage_link(image_link);
+                        product.setDescription(image_link);
                         product.setPrice(price);
                     }
                 }
@@ -125,55 +152,6 @@ public class UserDao {
         return product;
     }
 
-    public List<?> selectComments(int id) {
-        ArrayList<Comment> comments = new ArrayList<>();
-        try{
-            Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-            try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020")){
-
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM comments WHERE product_id=" + id);
-                while(resultSet.next()){
-                    int commentId = resultSet.getInt(1);
-                    String commentBody = resultSet.getString(2);
-                    int productId = resultSet.getInt(3);
-                    String userName = resultSet.getString(4);
-                    Comment comment = new Comment();
-                    comment.setId(commentId);
-                    comment.setComment(commentBody);
-                    comment.setProduct_id(productId);
-                    comment.setUser_name(userName);
-                    comments.add(comment);
-                }
-            }
-        }
-        catch(Exception ex){
-            System.out.println(ex);
-        }
-        return comments;
-    }
-
-    private boolean addComment(Comment comment) {
-        try{
-            Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-            try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/roadtothedream", "postgres", "aktos2020")){
-
-                String sql = "INSERT INTO comments (comment, product_id, user_name) VALUES (?, ?, ?)";
-                try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-                    preparedStatement.setString(1, comment.getComment());
-                    preparedStatement.setInt(2, comment.getProduct_id());
-                    preparedStatement.setString(3, comment.getUser_name());
-                    preparedStatement.executeUpdate();
-
-                    return true;
-                }
-            }
-        }
-        catch(Exception ex){
-            System.out.println(ex);
-        }
-        return false;
-    }
 
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

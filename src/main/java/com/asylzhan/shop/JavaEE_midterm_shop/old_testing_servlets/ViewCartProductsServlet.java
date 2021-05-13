@@ -1,4 +1,4 @@
-package com.asylzhan.shop.JavaEE_midterm_shop;
+package com.asylzhan.shop.JavaEE_midterm_shop.old_testing_servlets;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

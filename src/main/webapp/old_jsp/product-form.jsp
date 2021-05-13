@@ -51,35 +51,35 @@
 
                     <fieldset class="form-group">
                         <label>Product Name</label> <input type="text"
-                                                        value="<c:out value='${product.name}' />" class="form-control"
-                                                        name="name" required="required">
+                                                           value="<c:out value='${product.name}' />" class="form-control"
+                                                           name="name" required="required">
                     </fieldset>
 
-<%--                    <fieldset class="form-group">--%>
-<%--                        <label>Product Description</label> <input type="text"--%>
-<%--                                                         value="<c:out value='${product.description}' />" class="form-control"--%>
-<%--                                                         name="description">--%>
-<%--                    </fieldset>--%>
+                    <%--                    <fieldset class="form-group">--%>
+                    <%--                        <label>Product Description</label> <input type="text"--%>
+                    <%--                                                         value="<c:out value='${product.description}' />" class="form-control"--%>
+                    <%--                                                         name="description">--%>
+                    <%--                    </fieldset>--%>
 
                     <fieldset class="form-group">
                         <label>Product Description</label> <input type="text"
-                                                         value="<c:out value='${product.image_link}' />" class="form-control"
-                                                         name="image_link">
+                                                                  value="<c:out value='${product.image_link}' />" class="form-control"
+                                                                  name="image_link">
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label>Product Color</label> <input type="text"
-                                                           value="<c:out value='${product.color}' />"
-                                                           class="form-control"
-                                                           name="color">
+                                                            value="<c:out value='${product.color}' />"
+                                                            class="form-control"
+                                                            name="color">
                     </fieldset>
 
-                        <fieldset class="form-group">
-                            <label>Product Price</label> <input type="text"
-                                                                value="<c:out value='${product.price}' />"
-                                                                class="form-control"
-                                                                name="price">
-                        </fieldset>
+                    <fieldset class="form-group">
+                        <label>Product Price</label> <input type="text"
+                                                            value="<c:out value='${product.price}' />"
+                                                            class="form-control"
+                                                            name="price">
+                    </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>
                 </form>

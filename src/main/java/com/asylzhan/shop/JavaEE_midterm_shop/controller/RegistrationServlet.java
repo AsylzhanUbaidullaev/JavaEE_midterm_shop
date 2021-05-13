@@ -2,6 +2,7 @@ package com.asylzhan.shop.JavaEE_midterm_shop.controller;
 
 import com.asylzhan.shop.JavaEE_midterm_shop.dao.UserDao;
 import com.asylzhan.shop.JavaEE_midterm_shop.model.User;
+import org.h2.engine.Session;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -45,10 +46,16 @@ public class RegistrationServlet extends HttpServlet {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+
         try {
             userDao.registerUser(user);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            request.getRequestDispatcher("index.jsp").
+                    forward(request,response);
+
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
 

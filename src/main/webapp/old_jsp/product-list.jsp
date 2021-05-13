@@ -16,18 +16,11 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/index.css">
 </head>
 <body>
-<%@ include file = "header.jsp" %>
-
-<ul class="navbar-nav">
-    <li><a href="<%=request.getContextPath()%>/list"
-           class="nav-link">Products</a></li>
-</ul>
-
-
+<%@ include file = "../header.jsp" %>
 <div class="row">
     <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
 
@@ -37,7 +30,10 @@
         <div class="container text-left">
 
             <a href="<%=request.getContextPath()%>/ProductServlet/new" class="btn btn-success">Add
-                New Product</a>
+                New Product</a><br/>
+            <a href="<%=request.getContextPath()%>/product-list"
+               class="nav-link">Products</a>
+
         </div>
         <br>
         <table class="table table-bordered">
@@ -58,8 +54,8 @@
                 <tr>
                     <td><c:out value="${product.id}" /></td>
                     <td><c:out value="${product.name}" /></td>
-<%--                    <td><c:out value="${product.description}" /></td>--%>
-                    <td><c:out value="${product.image_link}" /></td>
+                        <%--                    <td><c:out value="${product.description}" /></td>--%>
+                    <td><c:out value="${product.description}" /></td>
                     <td><c:out value="${product.color}" /></td>
                     <td><c:out value="${product.price}" /></td>
                     <td><a href="edit?id=<c:out value='${product.id}' />">Edit</a>

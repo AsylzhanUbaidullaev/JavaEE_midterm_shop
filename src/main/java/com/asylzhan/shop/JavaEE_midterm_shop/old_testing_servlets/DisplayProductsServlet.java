@@ -1,4 +1,4 @@
-package com.asylzhan.shop.JavaEE_midterm_shop;
+package com.asylzhan.shop.JavaEE_midterm_shop.old_testing_servlets;
 
 import com.asylzhan.shop.JavaEE_midterm_shop.model.User;
 

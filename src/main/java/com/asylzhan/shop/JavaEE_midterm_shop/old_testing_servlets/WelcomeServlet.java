@@ -1,6 +1,4 @@
-package com.asylzhan.shop.JavaEE_midterm_shop;
-
-import com.asylzhan.shop.JavaEE_midterm_shop.model.User;
+package com.asylzhan.shop.JavaEE_midterm_shop.old_testing_servlets;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -8,8 +6,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/profile")
-public class ProfileServlet extends HttpServlet {
+@WebServlet(name = "WelcomeServlet", value = "/WelcomeServlet")
+public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,9 +18,9 @@ public class ProfileServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        HttpSession httpSession = request.getSession();
-        User user = (User) httpSession.getAttribute("user");
         String n=request.getParameter("email");
         out.print("Welcome "+n);
+
+        out.close();
     }
 }

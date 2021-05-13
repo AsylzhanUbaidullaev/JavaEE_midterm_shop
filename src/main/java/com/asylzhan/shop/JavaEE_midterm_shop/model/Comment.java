@@ -6,9 +6,18 @@ public class Comment implements Serializable {
     private int id;
     private String comment;
     private int product_id;
-    private String user_name;
+    private int userid;
+    private User user;
 
     public Comment() {
+    }
+
+    public Comment(int id, String comment, int product_id, int userid, User user) {
+        this.id = id;
+        this.comment = comment;
+        this.product_id = product_id;
+        this.userid = userid;
+        this.user = user;
     }
 
     public int getId() {
@@ -35,11 +44,19 @@ public class Comment implements Serializable {
         this.product_id = product_id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

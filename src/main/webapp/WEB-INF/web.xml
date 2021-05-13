@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>ProductTestServlet</servlet-name>
-        <servlet-class>com.asylzhan.shop.JavaEE_midterm_shop.ProductTestServlet</servlet-class>
+        <servlet-class>com.asylzhan.shop.JavaEE_midterm_shop.old_testing_servlets.ProductTestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProductTestServlet</servlet-name>

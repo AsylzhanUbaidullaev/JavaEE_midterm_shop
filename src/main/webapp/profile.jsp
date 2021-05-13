@@ -15,7 +15,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="header.jsp"/>
+    <%@include file="header.jsp"%>
 </header>
 <!-- Main -->
 <div class="main">
@@ -23,35 +23,19 @@
     <div class="card">
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>
-            <%--statement scriplet --%>
-            <%
-//                HttpSession httpSession = request.getSession();
-//                User user = (User) httpSession.getAttribute("user");
-//                if (user == null) {
 
-                String email = request.getParameter("email");
-                String name = request.getParameter("firstName");
-                String password = request.getParameter("password");
-
-            %>
             <table>
                 <tbody>
-<%--                <tr>--%>
-<%--                    <td>Name</td>--%>
-<%--                    <td>:</td>--%>
-<%--                    <td><%=user.getName()%></td>--%>
-<%--                </tr>--%>
 
-<%--                 expression statement--%>
                 <tr>
                     <td>Email</td>
                     <td>:</td>
-                    <td><%=email%></td>
+                    <td><jsp:getProperty name="user" property="email"/></td>
                 </tr>
                 <tr>
                     <td>Password</td>
                     <td>:</td>
-                    <td><%=password%></td>
+                    <td><jsp:getProperty name="user" property="password"/></td>
                 </tr>
                 <tr>
                     <td>Orders</td>

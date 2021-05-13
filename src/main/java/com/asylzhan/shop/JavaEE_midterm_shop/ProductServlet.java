@@ -97,9 +97,6 @@ public class ProductServlet extends HttpServlet {
         String color = request.getParameter("color");
         double price = Double.parseDouble(request.getParameter("price"));
 
-        Product book = new Product(id, name, image_link, color, price);
-        productDAO.updateProduct(book);
-        // redirect ???
         response.sendRedirect("/list");
     }
 

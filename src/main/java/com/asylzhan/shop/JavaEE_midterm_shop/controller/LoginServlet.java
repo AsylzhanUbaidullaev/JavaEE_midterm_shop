@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -25,53 +26,24 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-
+        UserDao userDao = new UserDao();
         try {
-            if (userDao.validate(user)) {
-                HttpSession session = request.getSession();
-                 session.setAttribute("user",user);
-                out.println("<center>\n<h1>You logged in " + name + " !</h1>");
-                response.sendRedirect("profile.jsp");
 
-//                RequestDispatcher rd=request.getRequestDispatcher("profile.jsp");
-//                rd.forward(request,response);
-//                RequestDispatcher forwardUser = getServletContext().getRequestDispatcher("product-list.jsp");
-//                forwardUser.include(request, response);
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            User user = userDao.validate(email, password);
+
+
+            if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user);
+                response.sendRedirect("profile.jsp");
             } else {
                 HttpSession session = request.getSession();
-                response.sendRedirect("testing.jsp");
-                //session.setAttribute("user", username);
-                //response.sendRedirect("login.jsp");
+                response.sendRedirect("error.jsp");
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException exception) {
+            throw new ServletException(exception);
         }
-
-
-
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//
-//        String n = request.getParameter("email");
-//        String p = request.getParameter("password");
-//
-//        if (LoginDao.validate(n, p)) {
-//            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-//            rd.forward(request, response);
-//        } else {
-//            out.print("Sorry username or password error");
-//            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-//            rd.include(request, response);
-//        }
-//
-//        out.close();
     }
 }

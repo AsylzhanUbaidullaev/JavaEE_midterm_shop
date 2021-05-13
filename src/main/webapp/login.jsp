@@ -15,7 +15,7 @@
 <div class="container">
     <main class="form-signin">
         <%-- expression scriplet & implicit object--%>
-        <form action="<%=request.getContextPath()%>/login" method="post">
+        <form action="LoginServlet" method="post">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <label for="inputEmail" class="visually-hidden">Email address</label>
             <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">

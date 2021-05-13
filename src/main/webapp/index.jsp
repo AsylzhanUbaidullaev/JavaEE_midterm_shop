@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Road To the Dream</title>
     <link rel="stylesheet" href="style/index.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -22,7 +22,7 @@
                             <div class="group___Section___1Pw7Y right___Section___SCz_w group___Group___3Qui-">
                                 <div><h1 type="h1" class="white white___Group___FckPN"
                                          style="font-family:Montserrat, Helvetica, Arial, sans-serif;text-transform:uppercase;margin:0 0 20px;padding:0;text-align:inherit;letter-dpacing:0.05rem;font-weight:600;font-size:3.2rem;line-height:3.8rem">
-                                    <br></h1><a href="https://roadtothedream.com/limited/vests/road-to-the-dream-vest">
+                                    <br></h1><a href="AllProductsServlet">
                                     <button type="button"
                                             class="button___Button___1DznK white___Button___n0Mhc mainSection___Button___1k8AU">Купить
                                     </button>
@@ -140,7 +140,7 @@
     </section>
     <div class="mainSectionContent___Men___TzLFp">
         <div>
-            <div class="categoryImage___Men___WTBOI textLeft___Men___2o9Dr"><a href="/mens"><img
+            <div class="categoryImage___Men___WTBOI textLeft___Men___2o9Dr"><a href="AllProductsServlet"><img
                     src="https://admin.roadtothedream.com/images/main_page_man.jpg">
                 <div class="buttonContainer___Men___1SBnu">
                     <div class="subBlock___Men___1mLzS">
@@ -152,17 +152,17 @@
             </a></div>
         </div>
 
-            <div class="categoryImage___Men___WTBOI textRight___Men___36m_L"><a href="/womens"><img
-                    src="https://admin.roadtothedream.com/images/main_page_woman.jpg">
-                <div class="buttonContainer___Men___1SBnu">
-                    <div class="subBlock___Men___1mLzS">
-                        <div class="subSubBlock___Men___3RjQP"><h3 class="black___Men___3oF9L">Женщины</h3>
-                            <button type="button" class="button___Button___1DznK black___Button___3JrdS">Перейти</button>
-                        </div>
+        <div class="categoryImage___Men___WTBOI textRight___Men___36m_L"><a href="AllProductsServlet"><img
+                src="https://admin.roadtothedream.com/images/main_page_woman.jpg">
+            <div class="buttonContainer___Men___1SBnu">
+                <div class="subBlock___Men___1mLzS">
+                    <div class="subSubBlock___Men___3RjQP"><h3 class="black___Men___3oF9L">Женщины</h3>
+                        <button type="button" class="button___Button___1DznK black___Button___3JrdS">Перейти</button>
                     </div>
                 </div>
-            </a>
             </div>
+        </a>
+        </div>
     </div>
 </main>
 

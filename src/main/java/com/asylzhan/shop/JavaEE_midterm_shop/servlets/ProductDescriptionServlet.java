@@ -1,5 +1,6 @@
-package com.asylzhan.shop.JavaEE_midterm_shop;
+package com.asylzhan.shop.JavaEE_midterm_shop.servlets;
 
+import com.asylzhan.shop.JavaEE_midterm_shop.dao.ProductDAO;
 import com.asylzhan.shop.JavaEE_midterm_shop.dao.UserDao;
 import com.asylzhan.shop.JavaEE_midterm_shop.model.Product;
 
@@ -20,7 +21,7 @@ public class ProductDescriptionServlet extends HttpServlet {
         if(protuctId != null && !(protuctId.equals(""))){
             try {
                 product = new UserDao().selectOne(Integer.parseInt(protuctId));
-                comments = new UserDao().selectComments(product.getId());
+                comments = new ProductDAO().selectComments(product.getId());
             } catch (Exception e) {
                 request.getSession().setAttribute("exception",e.getMessage());
             }
